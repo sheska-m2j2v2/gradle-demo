@@ -15,11 +15,14 @@ node ('worker_node1') {
   }
    stage ('Test') {
   // execute required unit tests in parallel
+ stash name: "project-stash", includes: "build.gradle", includes: "src"
         parallel (
              node ('master'){
+		unstash "project-stash"
                 build this, '-D test.single=TestExample1 test'
              },
              node ('worker_node2'){
+		unstash "project-stash"
                 build this, '-D test.single=TestExample2 test'
              },
 )
