@@ -7,7 +7,7 @@ node ('worker_node1') {
  try {
      stage('Source') { // for display purposes
       // Get some code from our Git repository
-      git 'git@diyvb:repos/gradle-greetings.git'
+      git branch: 'test', url: 'git@diyvb:repos/gradle-greetings.git'
       
    }
   stage ('Build') {
