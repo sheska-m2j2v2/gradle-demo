@@ -13,14 +13,7 @@ node ('worker_node1') {
   stage ('Build') {
   build this, 'clean build'
   }
-  stage ('Verify') {
-         // Now load 'verify.groovy'.
-    def verifyCall = load("/home/diyuser/shared_libraries/src/verify.groovy")
-    timeout(time: 5, unit: 'SECONDS') {
-    verifyCall("Please Verify the build")
-    }
-  }
-  stage ('Test') {
+   stage ('Test') {
   // execute required unit tests in parallel
         parallel (
              node ('master'){
@@ -31,6 +24,13 @@ node ('worker_node1') {
              },
 )
 
+  }
+ stage ('Verify') {
+         // Now load 'verify.groovy'.
+    def verifyCall = load("/home/diyuser/shared_libraries/src/verify.groovy")
+    timeout(time: 5, unit: 'SECONDS') {
+    verifyCall("Please Verify the build")
+    }
   }
 
 } catch (err) {
