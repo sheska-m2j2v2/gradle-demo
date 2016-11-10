@@ -11,7 +11,7 @@ node ('worker_node1') {
       
    }
   stage ('Build') {
-  build this, 'clean build'
+  build this, 'clean build -x test'
   }
    stage ('Test') {
   // execute required unit tests in parallel
