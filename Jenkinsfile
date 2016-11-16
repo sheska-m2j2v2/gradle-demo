@@ -4,7 +4,7 @@ node ('worker_node1') {
 try {
     stage('Build') {
 	  // Run the gradle build
-      gbuild this, 'clean build'
+      gbuild this, 'clean build -x test'
    }
    stage ('Test') {
    // execute required unit tests in parallel
