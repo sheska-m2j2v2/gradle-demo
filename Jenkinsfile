@@ -16,10 +16,10 @@ try {
    
       parallel (
              node ('master'){
-		build this, '-D test.single=TestExample1 test'
+		gbuild this, '-D test.single=TestExample1 test'
              },
              node ('worker_node2'){
-		 build this, '-D test.single=TestExample2 test'
+		gbuild this, '-D test.single=TestExample2 test'
              },
        )
 
