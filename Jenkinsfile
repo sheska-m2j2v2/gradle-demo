@@ -21,7 +21,7 @@ try {
              node ('worker_node2'){
 		 build this, '-D test.single=TestExample2 test'
              },
-       }
+       )
 
     }
 
@@ -30,7 +30,7 @@ catch (err) {
    echo "Caught: ${err}"
 }
    stage ('Notify') {
-    // mailUser('<your email address>', "Finished")
+     // mailUser('<your email address>', "Finished")
    }
 }
 
