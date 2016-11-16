@@ -13,7 +13,7 @@ try {
    }
    stage ('Test') {
    // execute required unit tests in parallel
-   stash name: 'test-sources', includes: 'build.gradle,src/test/'
+   stash name: 'test-sources', includes: 'build.gradle,src/'
    
       parallel (
              node ('master'){
