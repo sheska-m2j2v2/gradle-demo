@@ -13,12 +13,15 @@ try {
    }
    stage ('Test') {
    // execute required unit tests in parallel
+   stash name: 'test-sources', includes: 'build.gradle,src/test'
    
       parallel (
              node ('master'){
+                unstash 'test-sources'
 		gbuild this, '-D test.single=TestExample1 test'
              },
              node ('worker_node2'){
+  		unstash 'test-sources'
 		gbuild this, '-D test.single=TestExample2 test'
              },
        )
