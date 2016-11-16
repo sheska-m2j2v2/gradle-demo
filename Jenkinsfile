@@ -11,14 +11,14 @@ try {
    stash name: 'test-sources', includes: 'build.gradle,src/'
    
       parallel (
-             node ('master'){
+             master: { node ('master'){
                 unstash 'test-sources'
 		gbuild this, '-D test.single=TestExample1 test'
-             },
-             node ('worker_node2'){
+             }},
+             worker2: { node ('worker_node2'){
   		unstash 'test-sources'
 		gbuild this, '-D test.single=TestExample2 test'
-             },
+             }},
        )
 
     }
