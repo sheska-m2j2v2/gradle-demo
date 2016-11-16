@@ -13,10 +13,17 @@ try {
    }
    stage ('Test') {
    // execute required unit tests in parallel
-  
- 
+   
+      parallel (
+             node ('master'){
+		build this, '-D test.single=TestExample1 test'
+             },
+             node ('worker_node2'){
+		 build this, '-D test.single=TestExample2 test'
+             },
+       }
 
-   }
+    }
 
 }  // end try
 catch (err) {
