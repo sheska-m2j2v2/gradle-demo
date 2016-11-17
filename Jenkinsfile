@@ -29,9 +29,6 @@ node ('worker_node1') {
    stage ('Notify') {
      // mailUser('<your email address>', "Finished")
    }
-   stage ('Cleanup') {
-	// cleanup our workspace for next time
-        step([$class: 'WsCleanup'])
-   }
+   
 }
 
