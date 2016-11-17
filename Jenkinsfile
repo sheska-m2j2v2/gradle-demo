@@ -1,6 +1,8 @@
 #!groovy
 import static org.foo.Utilities.*
 node ('worker_node1') {
+   // always run with a new workspace
+   step([$class: 'WsCleanup'])
    try {
       stage('Source') {
 	 checkout scm
