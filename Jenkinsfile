@@ -1,8 +1,6 @@
 #!groovy
 import static org.foo.Utilities.*
 node ('worker_node1') {
-   // always run with a new workspace
-   step([$class: 'WsCleanup'])
    try {
       stage('Build') {
          // Run the gradle build
@@ -30,6 +28,10 @@ node ('worker_node1') {
    }
    stage ('Notify') {
      // mailUser('<your email address>', "Finished")
+   }
+   stage ('Cleanup') {
+	// cleanup our workspace for next time
+        step([$class: 'WsCleanup'])
    }
 }
 
