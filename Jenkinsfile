@@ -2,7 +2,7 @@
 import static org.foo.Utilities.*
 node ('worker_node1') {
    // always run with a new workspace
-   deleteDir()
+   step([$class: 'WsCleanup'])
    try {
       stage('Build') {
          // Run the gradle build
@@ -14,12 +14,12 @@ node ('worker_node1') {
          parallel (
             master: { node ('master'){
                // always run with a new workspace
-               deleteDir()
+               step([$class: 'WsCleanup'])
 	       gbuild this, '-D test.single=TestExample1 test'
             }},
             worker2: { node ('worker_node2'){
                // always run with a new workspace
-               deleteDir()
+               step([$class: 'WsCleanup'])
   	       gbuild this, '-D test.single=TestExample2 test'
             }},
          ) 
