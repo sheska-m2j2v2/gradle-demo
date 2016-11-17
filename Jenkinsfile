@@ -2,6 +2,9 @@
 import static org.foo.Utilities.*
 node ('worker_node1') {
    try {
+      stage('Source') {
+	 checkout scm
+      }
       stage('Build') {
          // Run the gradle build
          gbuild this, 'clean build -x test'
