@@ -1,12 +1,11 @@
 #!groovy
-import static org.foo.Utilities.*
+import static org.conf.Utilities.*
 node ('worker_node1') {
    // always run with a new workspace
    step([$class: 'WsCleanup'])
    try {
       stage('Source') {
 	 checkout scm
-	 stash name: 'test-sources', includes: 'build.gradle,src/test/'
       }
       stage('Build') {
          // Run the gradle build
@@ -14,21 +13,7 @@ node ('worker_node1') {
       }
       stage ('Test') {
       // execute required unit tests in parallel
-      
-         parallel (
-            master: { node ('master'){
-               // always run with a new workspace
-               step([$class: 'WsCleanup'])
-	       unstash 'test-sources'		
-	       gbuild this, '-D test.single=TestExample1 test'
-            }},
-            worker2: { node ('worker_node2'){
-               // always run with a new workspace
-               step([$class: 'WsCleanup'])
-               unstash 'test-sources'
-  	       gbuild this, '-D test.single=TestExample2 test'
-            }},
-         ) 
+              
       } 
    } 
    catch (err) {
