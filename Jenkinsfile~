@@ -1,10 +1,10 @@
 #!groovy
 import static org.conf.Utilities.*
 node ('worker_node1') {
-try {
+   // always run with a new workspace
+   step([$class: 'WsCleanup'])
+   try {
       stage('Source') {
-         // always run with a new workspace
-         step([$class: 'WsCleanup'])
 	 checkout scm
       }
       stage('Build') {
@@ -12,7 +12,7 @@ try {
          gbuild this, 'clean build -x test'
       }
       stage ('Test') {
-         // execute required unit tests in parallel
+      // execute required unit tests in parallel
               
       } 
    } 
@@ -20,7 +20,8 @@ try {
       echo "Caught: ${err}"
    }
    stage ('Notify') {
-      // mailUser('<your email address>', "Finished")
+     // mailUser('<your email address>', "Finished")
    }
+   
 }
 
