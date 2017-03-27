@@ -1,5 +1,5 @@
 #!groovy
-import static org.conf.Utilities.*
+@Library('Utilities@1.5')
 node ('worker_node1') {
 try {
       stage('Source') {
@@ -9,7 +9,7 @@ try {
       }
       stage('Build') {
          // Run the gradle build
-         gbuild this, 'clean build -x test'
+         gbuild2 'clean build -x test'
       }
       stage ('Test') {
          // execute required unit tests in parallel
@@ -23,4 +23,5 @@ try {
       // mailUser('<your email address>', "Finished")
    }
 }
+
 
