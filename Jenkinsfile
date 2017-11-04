@@ -4,7 +4,7 @@ node ('worker_node1') {
 try {
       stage('Source') {
          // always run with a new workspace
-         step([$class: 'WsCleanup'])
+         cleanWs()
 	 checkout scm
       }
       stage('Build') {
